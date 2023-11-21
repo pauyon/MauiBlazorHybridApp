@@ -1,0 +1,39 @@
+﻿<BlogCardList Blogs="_blogs" IsLoading="_isLoading" ViewEditClicked="NavigateToViewEdit" DeleteClicked="DeleteBlog"/>
+
+@code {
+    private List<Blog> _blogs = new ();
+    private bool _isLoading = true;
+
+    [Inject]
+    private IBlogService? BlogService { get; set; }
+
+    [Inject]
+    private NavigationManager? NavigationManager { get; set; }
+
+    [Inject]
+    private ISnackbar? Snackbar { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        await LoadBlogs();
+    }
+
+    private async Task LoadBlogs()
+    {
+        _isLoading = true;
+        _blogs = await BlogService!.GetAll();
+        _isLoading = false;
+    }
+
+    private async Task DeleteBlog(int id)
+    {
+        await BlogService!.DeleteById(id);
+        Snackbar!.Add("Blog removed", Severity.Success);
+    }
+
+    private void NavigateToViewEdit(int? id)
+    {
+        NavigationManager!.NavigateTo($"blogs/details/{id}");
+    }
+}

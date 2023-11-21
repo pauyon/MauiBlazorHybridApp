@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Blog\BlogCard.razor~RF6c2d998.TMP" />
+    <None Remove="Components\Blog\BlogCard.razor~RF6c76ea1.TMP" />
+    <None Remove="Components\Blog\BlogCardListCrud.razor~RF7138544.TMP" />
+    <None Remove="Components\Blog\BlogCrud.razor~RF6fef4dd.TMP" />
+    <None Remove="_Imports.razor~RF6c0f680.TMP" />
+    <None Remove="_Imports.razor~RF6e45c16.TMP" />
+    <None Remove="_Imports.razor~RF6e4a033.TMP" />
+    <None Remove="_Imports.razor~RF6e9d13e.TMP" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CodeBeam.MudBlazor.Extensions" Version="6.6.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.13" />
+    <PackageReference Include="MudBlazor" Version="6.11.0" />
+    <PackageReference Include="MudBlazor.Markdown" Version="0.1.2" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MauiBlazorHybridApp.PersistenceMemory\PersistenceInMemory.csproj" />
+    <ProjectReference Include="..\MauiBlazorHypridApp.Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>

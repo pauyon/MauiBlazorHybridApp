@@ -1,0 +1,62 @@
+﻿@if (IsLoading)
+{
+    <MudProgressLinear Indeterminate="true" />
+}
+else
+{
+    @if (Blogs != null && Blogs.Any())
+    {
+        <MudStack Row>
+            @foreach(var blog in Blogs)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h4">@blog.Name</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudGrid>
+                            <MudItem>
+                                <MudImage Src="@blog.Url" Height="250" />
+                            </MudItem>
+                        </MudGrid>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudStack Row>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => OnViewEditClicked(blog.Id)">View/Edit</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="() => OnDeleteClicked(blog.Id)">Delete</MudButton>
+                        </MudStack>
+                    </MudCardActions>
+                </MudCard>
+            }
+        </MudStack>
+    }
+    else
+    {
+        <MudText Typo="Typo.h3">There are no blogs yet.</MudText>
+    }
+}
+
+@code {
+
+    [Parameter]
+    public bool IsLoading { get; set; }
+
+    [Parameter]
+    public List<Blog>? Blogs { get; set; }
+
+    [Parameter]
+    public EventCallback<int?> ViewEditClicked { get; set; }
+
+    [Parameter]
+    public EventCallback<int> DeleteClicked { get; set; }
+
+    private void OnViewEditClicked(int? id)
+    {
+        ViewEditClicked.InvokeAsync(id);
+    }
+
+    private void OnDeleteClicked(int id)
+    {
+        DeleteClicked.InvokeAsync(id);
+    }
+}

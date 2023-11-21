@@ -1,0 +1,24 @@
+﻿@page "/blogs/details/{id:int}"
+
+<BlogCardDetails Blog="_blog" IsLoading="_isLoading" />
+
+@code {
+    private bool _isLoading = true;
+    private Blog? _blog;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    public IBlogService BlogService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+
+        await Task.Delay(100);
+        _blog = await BlogService.GetById(Id);
+        
+        _isLoading = false;
+    }
+}
